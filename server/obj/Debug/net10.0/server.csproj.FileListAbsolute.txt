@@ -1,0 +1,15 @@
+/Users/ananyajain/chat-application/server/bin/Debug/net10.0/server
+/Users/ananyajain/chat-application/server/bin/Debug/net10.0/server.deps.json
+/Users/ananyajain/chat-application/server/bin/Debug/net10.0/server.runtimeconfig.json
+/Users/ananyajain/chat-application/server/bin/Debug/net10.0/server.dll
+/Users/ananyajain/chat-application/server/bin/Debug/net10.0/server.pdb
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.AssemblyInfoInputs.cache
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.AssemblyInfo.cs
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.csproj.CoreCompileInputs.cache
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.sourcelink.json
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.dll
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/refint/server.dll
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.pdb
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/server.genruntimeconfig.cache
+/Users/ananyajain/chat-application/server/obj/Debug/net10.0/ref/server.dll
