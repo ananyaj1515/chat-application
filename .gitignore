@@ -1,0 +1,79 @@
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# NuGet packages
+*.nupkg
+**/packages/
+.nuget/
+
+# VS Code
+.vscode/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.csproj.user
+*.dotCover
+
+# Generated files
+*.generated.cs
+*.g.cs
+*AssemblyInfo.cs
+
+# Runtime files
+*.runtimeconfig.json
+*.deps.json
+*.dll
+*.pdb
+*.exe
+*.app
+
+# Publish output
+publish/
+**/publish/
+
+# Logs
+*.log
+
+# MacOS
+.DS_Store
+
+# Temporary files
+*.swp
+*~
+
+# Avalonia Designer / generated assets
+*.cache
+
+# JetBrains Rider local history
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# Avoid checking in local build artifacts and binaries
+*.zip
+*.tar.gz
+*.7z
+*.gz
+
+# Coverage
+coverage*
+*.coverage
+*.coveragexml
+
+# Package manager files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# DotNet Tools
+.vs/
+
+# Secret / configuration
+*.env
