@@ -64,6 +64,10 @@
             "AvaloniaUI.DiagnosticsSupport": {
               "target": "Package",
               "version": "[2.2.1, )"
+            },
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.4.1, )"
             }
           },
           "imports": [
