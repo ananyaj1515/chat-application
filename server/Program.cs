@@ -23,7 +23,7 @@ namespace Server
                 TcpClient client = await server.AcceptTcpClientAsync();
                 string clientId = Guid.NewGuid().ToString();
                 clients[clientId] = client;
-                Console.WriteLine("[Server] New connectoin added: "+ clientId);
+                Console.WriteLine("[Server] New connection added: "+ clientId);
                 _ = Task.Run(() => HandleClientAsync(clientId, client)); // we use Task.Run instead of await to prevent blocking the loop, so it can go service other clients also
             }
         }
@@ -32,8 +32,6 @@ namespace Server
         {
             NetworkStream stream = client.GetStream();
             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8) {AutoFlush = true};
-
             try
             {
                 // first message should be the name
@@ -53,7 +51,7 @@ namespace Server
                     }
 
                     string formatted = name + ": " + message;
-                    Console.WriteLine("[" + name + "] " + formatted);
+                    Console.WriteLine("[Client] " + formatted);
                     await BroadcastAsync(formatted);
                 }
 
