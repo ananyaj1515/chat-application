@@ -15,16 +15,19 @@ StreamWriter writer = new StreamWriter(stream, Encoding.UTF8) {AutoFlush = true}
 
 await writer.WriteLineAsync(username);
 
+// getting messages from the server
 _ = Task.Run(async () =>
 {
     string? line;
     while ((line = await reader.ReadLineAsync()) != null)
     {
-        Console.WriteLine("[Received] ", line);
+        Console.WriteLine(line);
     }
 
 });
 
+
+// sending messages to server
 Console.WriteLine("[Client] Type message and press enter. /exit to quit");
 
 string? message;
