@@ -1,0 +1,4 @@
+the server and the client, communicate via a TCP stream
+this stream belongs to the user
+and is accessed using client.GetStream(), both in the server and the client code
+then you intialise a stream reader, and a writer, to communicate to the client/and back using this stream

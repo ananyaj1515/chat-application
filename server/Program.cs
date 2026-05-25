@@ -24,7 +24,7 @@ namespace Server
                 string clientId = Guid.NewGuid().ToString();
                 clients[clientId] = client;
                 Console.WriteLine("[Server] New connection added: "+ clientId);
-                _ = Task.Run(() => HandleClientAsync(clientId, client)); // we use Task.Run instead of await to prevent blocking the loop, so it can go service other clients also
+                _ = Task.Run(() => HandleClientAsync(clientId, client)); // we use Task.Run instead of await to prevent blocking the loop, so it can go service other clients also, fire and forget
             }
         }
 
@@ -34,7 +34,7 @@ namespace Server
             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
             try
             {
-                // first message should be the name
+                // first message should be the name, implemented the same way in client code
                 string? name = await reader.ReadLineAsync();          
                 if (string.IsNullOrWhiteSpace(name)) return;
                 clientNames[clientId] = name;
@@ -43,7 +43,7 @@ namespace Server
                 await BroadcastAsync("[Server] " + name + " has joined");
 
                 string? message;
-                while ((message = await reader.ReadLineAsync()) != null)
+                while ((message = await reader.ReadLineAsync()) != null) // becomes null when client disconnects
                 {
                     if (message == "/exit")
                     {
