@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using client.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace client.ViewModels;
 
@@ -20,4 +22,22 @@ public partial class MainWindowViewModel : ViewModelBase
     
      private const string ServerIP = "127.0.0.0";
      private const int Port = 9000;
-}
+
+     [RelayCommand]
+     private async Task Connect()
+    {
+        
+    }
+
+    [RelayCommand]
+    private async Task Send()
+    {
+        
+    }
+
+    [RelayCommand]
+    private async Task Disconnect()
+    {
+        
+    }
+} 

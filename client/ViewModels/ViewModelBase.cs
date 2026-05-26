@@ -2,6 +2,6 @@
 
 namespace client.ViewModels;
 
-public abstract class ViewModelBase : ObservableObject
+public abstract class ViewModelBase : ObservableObject // observable object already inherits from INotifyPropertyChanged
 {
 }
