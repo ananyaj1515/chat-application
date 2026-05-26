@@ -42,25 +42,48 @@ public partial class MainWindowViewModel : ViewModelBase
             stream = client.GetStream();
             reader = new StreamReader(stream, Encoding.UTF8);
             writer = new StreamWriter(stream, Encoding.UTF8) {AutoFlush = true};
+            
             // get username
-            await writer.WriteLineAsync(username);
-            isConnected = true;
+            await writer.WriteLineAsync(Username);
+            IsConnected = true;
+
         } catch(Exception e)
         {
             Message errorMessage = new Message("Server", e.Message, DateTime.Now);
             messages.Add(errorMessage);
-            isConnected = false;
+            IsConnected = false;
         }
-        
-
-       
     }
 
     [RelayCommand]
     private async Task Send()
     {
+        if (writer == null)
+        {
+            Message errorMessage = new Message("Server","Something went wrong with the connection", DateTime.Now);
+            messages.Add(errorMessage);
+            return;
+        }
+
+        if (string.IsNullOrEmpty(InputText)) return;
+
         
+        try {
+            await writer.WriteLineAsync(InputText);
+            if (InputText == "/exit")
+            {
+                await Disconnect();
+            }
+            InputText = string.Empty;
+                
+        } catch(Exception e)
+        {
+            Message errorMessage = new Message("Server",e.Message, DateTime.Now);
+            messages.Add(errorMessage);
+            return;
+        }
     }
+    
 
     [RelayCommand]
     private async Task Disconnect()
