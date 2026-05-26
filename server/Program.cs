@@ -61,10 +61,12 @@ namespace Server
                 Console.WriteLine("[Server] client " + clientId + "ran into error: " + e.Message);
             } finally
             {
+                var name = clientNames[clientId];
                 clients.TryRemove(clientId, out _);
                 clientNames.TryRemove(clientId, out _);
                 client.Close();
                 Console.WriteLine("[Server] " + clientId + " removed.");
+                await BroadcastAsync("[Server] " + name + " removed.");
             }
         }
 
