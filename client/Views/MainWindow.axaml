@@ -20,23 +20,47 @@
         Margin="10"
         >
         <Grid 
-            ColumnDefinitions="Auto, *, Auto"
+            ColumnDefinitions="Auto, Auto, *, Auto"
             Margin="0,0,0,10"
             Grid.Row = "0">
-            <Button Grid.Column="0" Content="Connect"/>
-            <Button Grid.Column="2" Content="Disconnect"/>
+            <TextBox
+                Grid.Column="0"
+                PlaceholderText="Enter username"
+                Text="{Binding Username}"/>
+            <Button 
+                Grid.Column="1" 
+                Content="Connect"
+                Command="{Binding ConnectCommand}"/>
+            <Button 
+                Grid.Column="3" 
+                Content="Disconnect"
+                Command="{Binding DisconnectCommand}"/>
         </Grid>
 
         <ScrollViewer Grid.Row = "1"
             VerticalScrollBarVisibility="Visible"
             HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding MessageContent}"
+                            Margin="0,4"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
 
         <Grid Grid.Row = "2"
             ColumnDefinitions="*, Auto"
             HorizontalAlignment="Stretch">
-            <TextBox Grid.Column="0" PlaceholderText="Enter your message"/>
-            <Button Grid.Column="1" Content="Send"/>
+            <TextBox 
+                Grid.Column="0" 
+                PlaceholderText="Enter your message"
+                Text="{Binding InputText}"/>
+            <Button 
+                Grid.Column="1" 
+                Content="Send"
+                Command="{Binding SendCommand}"/>
         </Grid>
         
     </Grid>

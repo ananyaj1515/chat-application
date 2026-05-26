@@ -25,7 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private string username = string.Empty;
     
-    private const string ServerIP = "127.0.0.0";
+    private const string ServerIP = "127.0.0.1";
     private const int Port = 9000;
 
     // TCP-related fields
