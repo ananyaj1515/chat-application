@@ -82,6 +82,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Message errorMessage = new Message("Server","Something went wrong with the connection", DateTime.Now);
             messages.Add(errorMessage);
+            Disconnect();
             return;
         }
 

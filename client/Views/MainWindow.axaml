@@ -16,6 +16,28 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <controls:TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid RowDefinitions="Auto, *, Auto"
+        Margin="10"
+        >
+        <Grid 
+            ColumnDefinitions="Auto, *, Auto"
+            Margin="0,0,0,10"
+            Grid.Row = "0">
+            <Button Grid.Column="0" Content="Connect"/>
+            <Button Grid.Column="2" Content="Disconnect"/>
+        </Grid>
 
+        <ScrollViewer Grid.Row = "1"
+            VerticalScrollBarVisibility="Visible"
+            HorizontalScrollBarVisibility="Disabled">
+        </ScrollViewer>
+
+        <Grid Grid.Row = "2"
+            ColumnDefinitions="*, Auto"
+            HorizontalAlignment="Stretch">
+            <TextBox Grid.Column="0" PlaceholderText="Enter your message"/>
+            <Button Grid.Column="1" Content="Send"/>
+        </Grid>
+        
+    </Grid>
 </Window>
