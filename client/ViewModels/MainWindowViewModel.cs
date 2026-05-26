@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 using client.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,7 +13,7 @@ namespace client.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
-    private bool isConnected;
+    private bool isConnected = false;
 
     // this doesnt need observable property, as oc alr notifies when items/added or removed, would need if we would be changing the whole collection
     public ObservableCollection<Message> messages {get;} = new();
@@ -20,13 +24,36 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private string username = string.Empty;
     
-     private const string ServerIP = "127.0.0.0";
-     private const int Port = 9000;
+    private const string ServerIP = "127.0.0.0";
+    private const int Port = 9000;
 
-     [RelayCommand]
-     private async Task Connect()
+    // TCP-related fields
+    private TcpClient? client;
+    private NetworkStream? stream;
+    private StreamReader? reader;
+    private StreamWriter? writer;
+
+    [RelayCommand]
+    private async Task Connect()
     {
+        client = new TcpClient();
+        try {
+            await client.ConnectAsync(ServerIP, Port);
+            stream = client.GetStream();
+            reader = new StreamReader(stream, Encoding.UTF8);
+            writer = new StreamWriter(stream, Encoding.UTF8) {AutoFlush = true};
+            // get username
+            await writer.WriteLineAsync(username);
+            isConnected = true;
+        } catch(Exception e)
+        {
+            Message errorMessage = new Message("Server", e.Message, DateTime.Now);
+            messages.Add(errorMessage);
+            isConnected = false;
+        }
         
+
+       
     }
 
     [RelayCommand]
