@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Threading;
 using client.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -46,6 +47,7 @@ public partial class MainWindowViewModel : ViewModelBase
             // get username
             await writer.WriteLineAsync(Username);
             IsConnected = true;
+            StartReceiving();
 
         } catch(Exception e)
         {
@@ -53,6 +55,24 @@ public partial class MainWindowViewModel : ViewModelBase
             messages.Add(errorMessage);
             IsConnected = false;
         }
+    }
+
+    private void StartReceiving()
+    {
+        _ = Task.Run(async () =>
+        {
+            string? line;
+            while ((line = await reader?.ReadLineAsync()) != null)
+            {
+                Message newMessage = new Message("Server", line, DateTime.Now);
+                
+                Dispatcher.UIThread.Post(() =>
+                {
+                    messages.Add(newMessage);
+                });
+            }
+
+        });
     }
 
     [RelayCommand]
@@ -88,6 +108,13 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private async Task Disconnect()
     {
-        
+        await writer?.WriteLineAsync("/exit");
+        client?.Close();
+        IsConnected = false;
+        Message endMessage = new Message("Server", "Disconnected", DateTime.Now);
+        messages.Add(endMessage);
+        stream = null;
+        reader = null;
+        writer = null;
     }
 } 
