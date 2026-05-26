@@ -43,7 +43,7 @@
             <ItemsControl ItemsSource="{Binding messages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding MessageContent}"
+                        <TextBlock Text="{Binding Formatted}"
                             Margin="0,4"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
