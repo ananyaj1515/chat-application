@@ -61,7 +61,7 @@ namespace Server
                 Console.WriteLine("[Server] client " + clientId + "ran into error: " + e.Message);
             } finally
             {
-                var name = clientNames[clientId];
+                clientNames.TryGetValue(clientId, out var name);
                 clients.TryRemove(clientId, out _);
                 clientNames.TryRemove(clientId, out _);
                 client.Close();
