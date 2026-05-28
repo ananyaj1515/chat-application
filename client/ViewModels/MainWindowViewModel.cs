@@ -62,15 +62,22 @@ public partial class MainWindowViewModel : ViewModelBase
         _ = Task.Run(async () =>
         {
             string? line;
-            while ((line = await reader?.ReadLineAsync()) != null)
+            try
             {
-                Message newMessage = new Message("Server", line, DateTime.Now);
-                
-                Dispatcher.UIThread.Post(() =>
+                while ((line = await reader?.ReadLineAsync()) != null)
                 {
-                    messages.Add(newMessage);
-                });
+                    Message newMessage = new Message("Server", line, DateTime.Now);
+                    
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        messages.Add(newMessage);
+                    });
+                }
+            } catch(Exception)
+            {
+               
             }
+            
 
         });
     }
@@ -82,7 +89,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Message errorMessage = new Message("Server","Something went wrong with the connection", DateTime.Now);
             messages.Add(errorMessage);
-            Disconnect();
+            await Disconnect();
             return;
         }
 

@@ -6,7 +6,7 @@ string username = Console.ReadLine() ?? "Anonymous";
 
 TcpClient client = new TcpClient();
 await client.ConnectAsync("127.0.0.1", 9000);
-Console.WriteLine("[Client] connected to server 127.0.0.1 on port ", 9000); // this is my own machine, loopback address
+Console.WriteLine("[Client] connected to server 127.0.0.1 on port ", 9000); 
 
 NetworkStream stream = client.GetStream();
 StreamReader reader = new StreamReader(stream, Encoding.UTF8);
